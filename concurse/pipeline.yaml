@@ -1,0 +1,16 @@
+resources:
+- name: selenium
+  type: git
+  source:
+    uri: https://github.com/jbrodo/demo-selenium.git
+    branch: master
+
+jobs:
+- name: mavenjob
+  serial: true
+  plan:
+  - get: selenium
+    trigger: true
+  - task: mvn-test
+    privileged: true
+    file: selenium/test.yml
